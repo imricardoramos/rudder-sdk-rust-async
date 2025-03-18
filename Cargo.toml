@@ -5,7 +5,7 @@ edition = "2018"
 readme = "README.md"
 description = "The RudderStack Rust SDK is an analytics client to track events from your Rust application"
 license = "MIT"
-keywords = ["rudder","rudderanalytics","analytics","rust","rudderstack"]
+keywords = ["rudder", "rudderanalytics", "analytics", "rust", "rudderstack"]
 repository = "https://github.com/rudderlabs/rudder-sdk-rust"
 
 [[bin]]
@@ -15,7 +15,7 @@ required-features = ["cli"]
 
 [dependencies]
 thiserror = "1.0"
-reqwest = { version = "0.11", default-features = false, features=['json', 'blocking']}
+reqwest = { version = "0.11", default-features = false, features = ['json'] }
 serde_json = "1.0"
 log = "0.4"
 env_logger = "0.10.1"
@@ -32,8 +32,19 @@ version = "3.2"
 features = ["derive"]
 version = "1.0"
 
+[dependencies.tokio]
+version = "1.28"
+optional = true
+features = ["rt", "macros", "rt-multi-thread"]
+
 [features]
 default = ["default-tls"]
 cli = ["clap"]
 default-tls = ["reqwest/default-tls"]
 rustls-tls = ["reqwest/rustls-tls"]
+example-utils = ["dep:tokio"]
+
+[[example]]
+name = "sample_one"
+path = "examples/sample_one.rs"
+required-features = ["example-utils"]
